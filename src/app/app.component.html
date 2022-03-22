@@ -1,5 +1,17 @@
+{{ title }}
+<br>
+<br>
+<div>
+  <button (click)="play()">Play</button>
+  <button (click)="pause()">Pause</button>
+  <button (click)="stop()">Stop</button>
 
-<audio controls>
-  <source [src]="mp3" type="audio/ogg">
-Your browser does not support the audio element.
-</audio>
+</div>
+<br>
+<div>
+<span>{{current_time}}</span><input type="range" min="0"  max="{{duration}}" [value]="seek" (input)="seektoplay($event)"><span>{{duration}}</span>
+</div>
+<br>
+<div>
+ Volume <input type="range" min="0" max="1" step="0.05" (input)="setVolume($event)">
+</div>
