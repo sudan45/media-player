@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'media_player';
+  mp3="../assets/test.mp3"
 }
