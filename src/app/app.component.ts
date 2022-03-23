@@ -21,9 +21,9 @@ export class AppComponent {
     "loadedmetadata",
     "loadstart"
   ];
-  current_time:any="0"
-  duration:any="0"
-  seek:any=0
+  current_time:any="0:00:00"
+  duration:any="0:00:00"
+  total_duration:any=0
   audio = new Audio()
   streamObserver(mp3: any) {
     return new Observable(observer => {
@@ -31,7 +31,7 @@ export class AppComponent {
       this.audio.play()
 
       const handler = (event: Event) => {
-        this.seek=this.audio.currentTime
+        this.total_duration=this.audio.duration
         this.duration=this.formatTime(this.audio.duration)
         this.current_time=this.formatTime(this.audio.currentTime)
       }
