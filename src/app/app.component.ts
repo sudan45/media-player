@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as moment from "moment";
-import { title } from 'process';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'media_player';
   // mp3 = "../assets/test.mp3"
@@ -82,10 +82,6 @@ export class AppComponent {
 
     // this.streamObserver(event).subscribe(event=>{
     this.audio.pause()
-    
-    
-
-
 
     // })
   }
@@ -98,6 +94,7 @@ export class AppComponent {
     this.formatTime(this.audio.currentTime = e.target.value)
 
   }
+
 
 }
 
