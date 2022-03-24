@@ -1,5 +1,4 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-music',
