@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as moment from "moment";
+import { title } from 'process';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,8 @@ import * as moment from "moment";
 })
 export class AppComponent {
   title = 'media_player';
-  mp3 = "../assets/test.mp3"
-  volume: number = 0
+  // mp3 = "../assets/test.mp3"
+  volume: Number = 100
   audioEvents = [
     "ended",
     "error",
@@ -29,7 +30,7 @@ export class AppComponent {
   audio = new Audio()
   streamObserver(mp3: any) {
     return new Observable(observer => {
-      this.audio.src = this.mp3
+      this.audio.src = mp3
       this.audio.play()
 
       const handler = (event: Event) => {
@@ -40,10 +41,11 @@ export class AppComponent {
       }
       // add event call or sene the event
       this.addevent(this.audio, this.audioEvents, handler)
+
+
     })
   }
   formatTime(time: number, format: string = "HH:mm:ss") {
-    console.log(time)
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
   }
@@ -55,7 +57,7 @@ export class AppComponent {
 
   }
   // remove event functions
-  // removeevent(obj: any, events: any, handler: any) {
+  // removeEvent(obj: any, events: any, handler: any) {
   //   events.forEach((event: any) => {
   //     obj.removeEventListener(event, handler)
   //   })
@@ -64,18 +66,28 @@ export class AppComponent {
 
 
   setVolume(e: any) {
-    console.log(e.target.value);
     this.volume = (e.target.value * 100)
-
     this.audio.volume = e.target.value
   }
 
-  play() {
-    this.streamObserver(this.mp3).subscribe(event => { })
+  @Output() parentFunction: EventEmitter<any> = new EventEmitter()
+
+  play(event: any) {
+    this.streamObserver(event).subscribe(event => { })
   }
 
+
   pause() {
+
+
+    // this.streamObserver(event).subscribe(event=>{
     this.audio.pause()
+    
+    
+
+
+
+    // })
   }
 
   stop() {
@@ -86,7 +98,6 @@ export class AppComponent {
     this.formatTime(this.audio.currentTime = e.target.value)
 
   }
-
 
 }
 

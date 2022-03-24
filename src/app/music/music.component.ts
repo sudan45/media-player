@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-music',
@@ -10,19 +10,25 @@ export class MusicComponent implements OnInit {
 
   music: any = [{
     "name": "Ashes By Steller",
-    "music": "../assets/Ashes.mp3"
+    "music_mp3": "../assets/Ashes.mp3"
   },
   {
     "name": "Heer Ranja By Bhuvan Bam",
-    "music": "../assets/heer_ranja.mp3"
+    "music_mp3": "../assets/heer_ranja.mp3"
   },
   {
     "name": "Namo Namo By Amit Trivedi",
-    "music": "../assets/test.mp3"
+    "music_mp3": "../assets/test.mp3"
   },
 ]
 
+@Output() Songs=new EventEmitter<any>();
 
+play_songs(value:any){
+  console.log(value);
+  
+  this.Songs.emit(value)
+}
 
 
   constructor() { }
