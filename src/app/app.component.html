@@ -1,6 +1,6 @@
 {{ title }}
-<br>
-<br>
+<app-music></app-music>
+<br><br>
 <div>
   <button (click)="play()">Play</button>
   <button (click)="pause()">Pause</button>
@@ -13,5 +13,5 @@
 </div>
 <br>
 <div>
- Volume <input type="range" min="0" max="1" step="0.05" (input)="setVolume($event)">
+ Volume <input type="range" min="0" max="1" [defaultValue]="50" step="0.05" (input)="setVolume($event)"> {{volume}}%
 </div>

@@ -10,6 +10,7 @@ import * as moment from "moment";
 export class AppComponent {
   title = 'media_player';
   mp3 = "../assets/test.mp3"
+  volume: number = 0
   audioEvents = [
     "ended",
     "error",
@@ -21,9 +22,10 @@ export class AppComponent {
     "loadedmetadata",
     "loadstart"
   ];
-  current_time:any="0:00:00"
-  duration:any="0:00:00"
-  total_duration:any=0
+  current_time: any = "0:00:00"
+  duration: any = "0:00:00"
+  total_duration: any = 0
+  seek: any = 0
   audio = new Audio()
   streamObserver(mp3: any) {
     return new Observable(observer => {
@@ -31,14 +33,13 @@ export class AppComponent {
       this.audio.play()
 
       const handler = (event: Event) => {
-        this.total_duration=this.audio.duration
-        this.duration=this.formatTime(this.audio.duration)
-        this.current_time=this.formatTime(this.audio.currentTime)
+        this.seek = this.audio.currentTime
+        this.total_duration = this.audio.duration
+        this.duration = this.formatTime(this.audio.duration)
+        this.current_time = this.formatTime(this.audio.currentTime)
       }
       // add event call or sene the event
       this.addevent(this.audio, this.audioEvents, handler)
-
-
     })
   }
   formatTime(time: number, format: string = "HH:mm:ss") {
@@ -63,6 +64,9 @@ export class AppComponent {
 
 
   setVolume(e: any) {
+    console.log(e.target.value);
+    this.volume = (e.target.value * 100)
+
     this.audio.volume = e.target.value
   }
 
@@ -78,8 +82,8 @@ export class AppComponent {
     this.audio.pause()
     this.audio.currentTime = 0
   }
-  seektoplay(e:any){
-    this.formatTime(this.audio.currentTime=e.target.value)
+  seektoplay(e: any) {
+    this.formatTime(this.audio.currentTime = e.target.value)
 
   }
 
