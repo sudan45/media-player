@@ -1,3 +1,7 @@
 <h3> Songs</h3>
-
+<div class="card">
+<ul style="list-style: none;">
 <li *ngFor="let music of music" (click)="play_songs(music.music_mp3)" > {{music.name}} </li>
+
+</ul>
+</div>

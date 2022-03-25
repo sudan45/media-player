@@ -10,7 +10,10 @@ import * as moment from "moment";
 
 export class AppComponent {
   title = 'media_player';
-  // mp3 = "../assets/test.mp3"
+  playbtn: any = false;
+  pausebtn:any = false
+
+  mp3 = "../assets/test.mp3"
   volume: Number = 100
   audioEvents = [
     "ended",
@@ -34,6 +37,7 @@ export class AppComponent {
       this.audio.play()
 
       const handler = (event: Event) => {
+        console.log(event)
         this.seek = this.audio.currentTime
         this.total_duration = this.audio.duration
         this.duration = this.formatTime(this.audio.duration)
@@ -41,8 +45,6 @@ export class AppComponent {
       }
       // add event call or sene the event
       this.addevent(this.audio, this.audioEvents, handler)
-
-
     })
   }
   formatTime(time: number, format: string = "HH:mm:ss") {
@@ -73,16 +75,20 @@ export class AppComponent {
   @Output() parentFunction: EventEmitter<any> = new EventEmitter()
 
   play(event: any) {
+    this.audio.play()
+
     this.streamObserver(event).subscribe(event => { })
   }
 
 
   pause() {
-
-
-    // this.streamObserver(event).subscribe(event=>{
+    this.playbtn = true
     this.audio.pause()
-
+    // this.total_duration=this.audio.currentTime
+    
+    // this.audio.addEventListener("play",event=>{
+    //   console.log(event)
+    //   this.audio.play()
     // })
   }
 
@@ -95,6 +101,7 @@ export class AppComponent {
 
   }
 
+  
 
 }
 

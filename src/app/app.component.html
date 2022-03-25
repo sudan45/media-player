@@ -1,10 +1,12 @@
 {{ title }}
 
+<div class="card text-center" >
 <app-music (Songs)="play($event)"></app-music>
 <br><br>
 <div>
   <!-- <button (click)="play()">Play</button> -->
-  <button (click)="pause()">Pause</button>
+  <button *ngIf="playbtn" (click)="play(mp3)">Play</button>
+  <button *ngIf="!playbtn" (click)="pause()">Pause</button>
   <button (click)="stop()">Stop</button>
 
 </div>
@@ -15,4 +17,5 @@
 <br>
 <div>
  Volume <input type="range" min="0" max="1" [defaultValue]="50" step="0.05" (input)="setVolume($event)"> {{volume}}%
+</div>
 </div>
